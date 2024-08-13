@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" style="font-family: 'Fragment Mono', monospace;">
 	<head>
 		<meta charset="utf-8" />
-<!-- pretty font -->
+
 		<link href="https://fonts.googleapis.com/css2?family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
 
 		<link rel="icon" href="%sveltekit.assets%/question-mark.png" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%sveltekit.head%
+		%sveltekit.status%
 		<title>Spotify Guesser</title>
-	</head>														<!-- rgb(15, 15, 15) -->
-	<body data-sveltekit-preload-data="hover" style="background-color: #191414; overflow: hidden;">
-		<div style="display: contents">%sveltekit.body%</div>
+	</head>															<!-- rgb(15, 15, 15) -->
+	<body data-sveltekit-preload-data="hover" style="background-color: #121212;">
+		<div style="display: contents">%sveltekit.error.message%</div>
 	</body>
 </html>

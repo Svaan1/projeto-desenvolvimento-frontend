@@ -1,36 +1,21 @@
 <script>
-    import { onMount } from 'svelte';
     import Icon from '@iconify/svelte';
-
-    // Function to handle page load time
-    function handlePageLoad() {
-        const loadTime = new Date().toISOString();
-        localStorage.setItem('pageLoadTime', loadTime);
-        console.log(`Page loaded at: ${loadTime}`);
-    }
-
-    // Execute function when the component is mounted
-    onMount(() => {
-        const storedLoadTime = localStorage.getItem('pageLoadTime');
-        if (storedLoadTime) {
-            console.log(`Stored page load time: ${storedLoadTime}`);
-        } else {
-            handlePageLoad();
-        }
-    });
+    import Footer from '../lib/+footer.svelte'
 
     const handleClick = () => {
         console.log("clicked!");
-        window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        window.location.href = "/home"
     }
 
 </script>
 
 <main>
-    <div class="container"> <!-- putting this in a div container makes it easier to manip -->
+    <div class="container">
         <img class="spotify" src="spotify.png" alt="spotify ico">
-        <img class="spotify-shdw" src="spotify.png" alt="spotify ico">
+        <h2>Spotify</h2>
     </div>
+    <h1><strong>Spotify Music Guess</strong></h1>
+    <p><strong>Can you guess the correct song?</strong></p>
     <button on:click={handleClick} class="login">
         Log in with Spotify
         <div class="icon">
@@ -38,56 +23,74 @@
         </div>
     </button>
 </main>
+<Footer /> 
+<!-- Footer from +footer.svelte -->
 
 <style>
+
+/* Global styling */
+
+    *{
+        overflow: hidden;
+        margin-top: 0;
+        color: #ffffff;
+    }
+
+/* Tag Styling */
+
+    h1{
+        margin-bottom: 15px;
+        font-size: 4em;
+        font-family: 'Fragment Mono', monospace;
+    }
+
+    h2 {
+        user-select: none;
+        color: #1DB954;
+        font-family: 'Fragment Mono', monospace;
+        margin-bottom: 0;
+    }
+
+    p{
+        font-size: 1.5em;
+        font-family: 'Fragment Mono', monospace;
+    }
+
     main {
-        height: 80vh;
+        height: 100vh;
         display: flex;
-        margin: 0 auto;
         overflow: hidden;
         align-items: center;
         flex-direction: column;
         justify-content: center;
     }
 
-/* Section: main styling */
+/* Section: . styling */
 
     .container {
-        position: relative;
-        display: inline-block;
+        display: flex;
+        overflow: hidden;
+        align-items: center;
+        flex-direction: row;
+        justify-content: center;
     }
 
     .spotify {
-        z-index: 1;
-        height: auto;
-        width: 250px;
-        display: block;
-        position: relative;
-    }
-
-    .spotify-shdw {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        z-index: 0;
-        opacity: 0.5;
-        width: 250px;
-        height: auto;
-        filter: blur(30px);
-        animation: blurAnimation 3s infinite;
+        user-select: none;
+        width: 100px;
+        margin-right: 0px;
     }
 
     .login {
-        width: 200px;
-        height: 65px;
+        height: 55px;
+        color: #000;
         display: flex;
         font-size: 1em;
-        padding: 0 1rem;
-        text-align: center;
+        cursor: pointer;
+        padding: 10px 20px;
         align-items: center;
         border-radius: 10px;
         border-style: groove;
-        justify-content: center;
         text-decoration: underline;
         background-color: #ffffff;
         box-shadow: 0px 0px #1DB954;
@@ -95,29 +98,24 @@
     }
 
     .icon{
-        font-size: 1.5em; 
+        font-size: 1.5em;
         margin-left: 0.3rem;
-        margin-top: 0.2rem;
+        color: #000;
     }
 
 /* Section: Hovers */
 
     .login:hover{
-        box-shadow: 7px 7px #1DB954;
+        box-shadow: 7px 10px #0c702f;
+    }
+
+/* Section: Click */
+
+    .login:active{
+        background-color: #c2c2c2;
     }
 
 /* Section: animations */
 
-    @keyframes blurAnimation {
-        0% {
-            filter: blur(30px);
-        }
-        50% {
-            filter: blur(70px);
-        }
-        100% {
-            filter: blur(30px);
-        }
-    }
 
 </style>
