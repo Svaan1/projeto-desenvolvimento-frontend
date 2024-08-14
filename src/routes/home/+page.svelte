@@ -1,12 +1,14 @@
 <script>
+    import Sidebar from '../../lib/+sidebar.svelte'
 </script>
 
 
 <main>
     <div class="container">
-        
+        <h1><strong>Hello World!</strong></h1>
     </div>
 </main>
+<Sidebar/>
 
 <style>
     *{
@@ -29,15 +31,6 @@
     .container h1{
         user-select: none;
         color: #1DB954;
-    }
-
-    .container p{
-        user-select: none;
-        color: #ff3e00;
-    }
-
-    .container a{
-        color: #fff;
     }
     
 </style>
