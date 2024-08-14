@@ -1,12 +1,13 @@
 <script>
+
 </script>
 
 
 <main>
     <div class="container">
-        <h1><strong>About this site</strong></h1>
-        <p>:)</p>
-        <p>return <a href="/">Home</a></p>
+        <h1>Hello user.</h1>
+        <h2>this is your profile.</h2>
+        <p>return <a href="/home">Home</a></p>
     </div>
 </main>
 
@@ -33,8 +34,11 @@
         color: #1DB954;
     }
 
+    .container h2{
+        color: #ff3e00;
+    }
+
     .container p{
-        user-select: none;
         color: #ff3e00;
     }
 

@@ -99,7 +99,7 @@
         text-decoration: underline;
         background-color: #ffffff;
         box-shadow: 0px 0px #1DB954;
-        transition: box-shadow 0.5s ease-in;
+        transition: box-shadow 0.3s ease;
     }
 
     .icon{

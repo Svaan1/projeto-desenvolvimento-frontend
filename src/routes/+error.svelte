@@ -1,12 +1,11 @@
 <script>
+
 </script>
 
 
 <main>
     <div class="container">
-        <h1><strong>About this site</strong></h1>
-        <p>:)</p>
-        <p>return <a href="/">Home</a></p>
+        <h1><strong>Error</strong></h1>
     </div>
 </main>
 
@@ -31,15 +30,6 @@
     .container h1{
         user-select: none;
         color: #1DB954;
-    }
-
-    .container p{
-        user-select: none;
-        color: #ff3e00;
-    }
-
-    .container a{
-        color: #fff;
     }
     
 </style>
