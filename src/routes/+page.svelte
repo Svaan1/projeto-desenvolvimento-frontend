@@ -4,7 +4,7 @@
     const handleClick = () => {
         console.log("clicked!");
         window.location.href = "/home"
-    }adad
+    }
 </script>
 
 <main>

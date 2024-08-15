@@ -1,5 +1,4 @@
 <script>
-  import Tabs from '../test/shared/tabs.svelte';
   import UserPage from '../user/+page.svelte';
 
   let items = ['Home', 'User', 'Lorem', 'Ipsum'];
@@ -11,7 +10,7 @@
 </script>
 
 <main>
-  <Tabs {activeItem} {items} on:currentView={changeView}/>
+  <Tabs {activeItem} items={items} on:currentView={changeView}/>
   {#if activeItem === 'Home'}
     <p>Home page!</p>
   {:else if activeItem === 'User'}
