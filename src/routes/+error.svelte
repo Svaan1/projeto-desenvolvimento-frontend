@@ -1,22 +1,14 @@
-<script context="module">
-    export function load({error}) {
-        return {
-            props: { message: error.message }
-        };
-    }
-</script>
-
 <script>
-    export let message;
+	import { page } from '$app/stores';
 </script>
-
 
 <main>
     <div class="container">
-        <h1>Oooopss, something went wrong :(((</h1>
-        <span>error message: <strong>{message}</strong></span>
+        <h1>Oooopss</h1>
+        <span>Error code: {$page.status}</span>
+            <img src="https://content.imageresizer.com/images/memes/Pingu-stare-meme-2.jpg" alt="0_0">
         <h2>You can hang around a bit or</h2>
-        <p>return <a href="/home">Home</a></p>
+        <p>return <a class="redirectHome" href="/home">Home</a></p>
     </div>
 </main>
 
@@ -29,6 +21,14 @@
         font-family: 'Fragment Mono', monospace;
     }
 
+    img {
+        width: auto;
+        height: auto;
+        max-width: 60%;
+        max-height: 60%;
+        align-items: center;
+    }
+
     .container{
         height: 80vh;
         display: flex;
@@ -39,17 +39,28 @@
     }
 
     .container h1{
-        user-select: none;
         color: #1DB954;
+        user-select: none;
+        text-align: center;
     }
 
-    .container h2{
+    .container span{
+        color: #fff;
         user-select: none;
-        color: #2c45b8;
+        margin-bottom: 15px;
     }
 
     .container a{
-        color: #fff;
+        user-select: none;
+        text-decoration: underline;
+    }
+
+    .container h2{
+        color: #2c45b8;
+        margin-top: 10px;
+        margin-bottom: 0;
+        user-select: none;
+        text-align: center;
     }
 
     .container p{
@@ -57,7 +68,7 @@
         color: #fff;
     }
 
-    .container strong{
+    .container a{
         user-select: none;
         color: crimson;
     }

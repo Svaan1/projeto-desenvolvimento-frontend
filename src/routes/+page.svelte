@@ -4,7 +4,7 @@
     const handleClick = () => {
         console.log("clicked!");
         window.location.href = "/home"
-    }
+    }adad
 </script>
 
 <main>
@@ -14,7 +14,7 @@
             <h2>Spotify</h2>
         </div>
         <h1><strong>Spotify Music Guess</strong></h1>
-        <p><strong>Can you guess the correct <span></span></strong></p>
+        <p><strong>Can you guess the correct <span class="auto-type"></span></strong></p>
         <button on:click={handleClick} class="login">
             Log in with Spotify
             <div class="icon">
@@ -78,7 +78,6 @@
         justify-content: center;
     }
 
-
     .image-container {
         display: flex;
         overflow: hidden;
@@ -130,15 +129,15 @@
     }
 
 /* Section: before */
-
+/* 
     p span::before{
-        content: "Song?";
+        content: "Μουσική?";
         color: crimson;
         animation: words 20s infinite;
-    }
-
+    } 
+*/
 /* Section: After */
-
+/* 
     p span::after{
         content: "";
         position: absolute;
@@ -148,10 +147,10 @@
         border-left: 2px solid crimson;
         right: -8px;
         animation: cursor .8s infinite, typing 20s steps(14) infinite;
-    }
+    } */
 
 /* Section: Animations */
-
+/* 
     @keyframes cursor{
         to{
             border-left: 2px solid rgb(15, 15, 15);
@@ -164,7 +163,7 @@
             font-size: 1em;
         }
         21%, 40%{
-            content: "Chanson?";
+            content: "Музыка?";
             font-size: 1em;
         }
         41%, 60%{
@@ -172,7 +171,7 @@
             font-size: 0.8em;
         }
         61%, 80%{
-            content: "Песня?";
+            content: "Chanson?";
             font-size: 1em;
         }
         81%, 100%{
@@ -188,6 +187,6 @@
         5%,20%,25%,40%,45%,60%,65%,80%,85%{
             width: calc(100% + 8px);
         }
-    }
+    } */
 
 </style>
