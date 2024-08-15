@@ -1,24 +1,16 @@
-<script context="module">
-    export function load({error}) {
-        return {
-            props: { message: error.message }
-        };
-    }
-</script>
-
 <script>
-    export let message;
+    import Sidebar from '../../lib/components/+sidebar.svelte'
 </script>
 
 
 <main>
     <div class="container">
-        <h1>Oooopss, something went wrong :(((</h1>
-        <span>error message: <strong>{message}</strong></span>
-        <h2>You can hang around a bit or</h2>
+        <h1>Hello user.</h1>
+        <h2>this is your profile.</h2>
         <p>return <a href="/home">Home</a></p>
     </div>
 </main>
+<Sidebar/>
 
 <style>
     *{
@@ -44,22 +36,15 @@
     }
 
     .container h2{
-        user-select: none;
-        color: #2c45b8;
+        color: #ff3e00;
+    }
+
+    .container p{
+        color: #ff3e00;
     }
 
     .container a{
         color: #fff;
     }
-
-    .container p{
-        user-select: none;
-        color: #fff;
-    }
-
-    .container strong{
-        user-select: none;
-        color: crimson;
-    }
-
+    
 </style>

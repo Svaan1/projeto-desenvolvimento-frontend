@@ -1,16 +1,14 @@
-<script>
-    // Your script here (if needed)
-</script>
-
-<main class="learnContainer">
-    <a href="/about"><strong><p class="learn">Learn more.</p></strong></a>
-</main>
+<footer>
+    <div class="learnContainer">
+        <a href="/about"><strong><p class="learn">Learn more.</p></strong></a>
+    </div>
+</footer>
 
 <style>
-    *{
-        overflow: hidden;
-    }
-    main {
+    footer {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
         font-family: 'Fragment Mono', monospace;
     }
 
@@ -19,15 +17,13 @@
         bottom: 0;
         width: 100%;
         display: flex;
-        padding: 0.5rem;
         position: fixed;
-        align-items: flex-end;
         justify-content: center;
     }
 
     .learn {
-        font-size: 1.3em;
         color: #ffffff;
+        font-size: 1.5em;
         text-decoration: underline;
     }
 </style>
