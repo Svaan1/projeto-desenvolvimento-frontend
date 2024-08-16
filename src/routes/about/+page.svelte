@@ -1,124 +1,149 @@
 <script>
+    import Footer from '../../lib/components/footer_about.svelte';
+    import { onMount } from 'svelte';
+
+    let isMobile = false;
+
+    onMount(() => {
+        const userAgent = navigator.userAgent || window.opera;
+        isMobile = /android|iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+    });
 </script>
-<!-- TODO: fix this page -->
+
 <main>
-    <div class="about-container">
-        <h1><strong>About this site</strong></h1>
-        <div class="lorem-container">
+    <div class="container">
+        <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 14 14" {...$$props} class="fly">
+            <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" d="M1.25 2.75h1.61a.49.49 0 0 1 .48.38l.51 2l5-1a3.69 3.69 0 0 1 4.4 3.59a1 1 0 0 1-1 1h-4.4l-1 1.58a2 2 0 0 1-1.68.92h-1.1a.5.5 0 0 1-.44-.73l.88-1.74H1.75a1 1 0 0 1-1-1v-4.5a.5.5 0 0 1 .5-.5" />
+        </svg>
+      </div>
+    <div class="main-container">
+        {#if isMobile}
+            <h1>About this <a class="mobile" href="/">site</a></h1>
+        {:else}
+            <h1>About this <a class="desktop" href="/">site</a></h1>
+        {/if}
+        <div class="description-container">
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
-                Curabitur pretium tincidunt lacus. 
-                Nulla gravida orci a odio. 
-                Nullam varius, turpis et commodo pharetra, est nulla ultrices enim, id tincidunt justo nulla quis orci. 
-                Praesent vestibulum dapibus nibh. 
-                Fusce convallis metus id felis imperdiet, eu vehicula eros sodales. 
-                Donec vehicula auctor turpis, eu tincidunt purus dapibus ut. 
-                Nam volutpat sapien a risus interdum, in laoreet libero dapibus. 
-                Morbi scelerisque, elit non posuere faucibus, justo purus dapibus nulla, in egestas metus elit sed sapien. 
-                Nullam sit amet purus tincidunt, consectetur ligula et, hendrerit ante. 
-                Mauris quis velit eget urna vehicula fermentum nec non urna. 
-                Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-                Aenean euismod libero et dui suscipit luctus. 
-                Vestibulum congue magna id lorem scelerisque, et sodales felis faucibus. 
-                Quisque sollicitudin tortor nec eros consectetur, sit amet maximus nunc pellentesque. 
-                Integer feugiat arcu ut eros interdum, ac sodales lectus blandit. 
-                Phasellus tempor sem eu orci malesuada, in lacinia sapien euismod. 
-                Suspendisse potenti. 
-                Nam facilisis sapien nec est malesuada, ac ultricies libero vestibulum. 
-                Sed lacinia dui ac velit malesuada, ac pharetra justo tempus. 
-                Integer dictum convallis ligula, vel tristique quam luctus ut. 
-                Nulla facilisi. Proin at dui nec urna pretium cursus. 
-                Fusce et neque et lorem vestibulum scelerisque. 
-                Cras vestibulum varius nulla, sit amet cursus nisi elementum sit amet. 
-                Vivamus feugiat ante vitae tortor pretium, in pharetra nunc posuere. 
-                Nulla a leo et eros vehicula fermentum. 
-                Ut vel laoreet est. 
-                Duis a orci vel urna pellentesque pharetra a id libero. 
-                Aenean fringilla magna ut libero convallis gravida. 
-                Pellentesque ut magna at dolor sollicitudin feugiat ac sed quam. 
-                Mauris facilisis leo nec risus tempus, vel scelerisque justo ultricies. 
-                Nullam varius gravida libero, ut varius libero gravida id. 
-                Donec aliquam turpis vitae neque pharetra, nec fringilla magna tincidunt. 
-                In ultricies mauris sit amet interdum luctus. 
-                Quisque ac urna sit amet justo facilisis consequat. 
-                Proin aliquam sapien id mi luctus lacinia. 
-                Ut pretium sapien ac massa vulputate, non gravida mi congue.
+                <strong>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Cum autem mollitia fugit ullam aspernatur dolorum non libero exercitationem itaque vero a, qui alias eveniet nisi suscipit placeat consequatur beatae aliquid! 
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. 
+                    Nobis officia, veritatis recusandae omnis praesentium porro, maxime laboriosam earum et dolore, beatae eligendi illo voluptatibus doloremque repudiandae obcaecati necessitatibus eius facere! 
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+                    Aperiam quaerat vitae, atque, nesciunt perspiciatis dolor nam quod ratione quisquam, corporis rem repellat repellendus alias nostrum? 
+                    Facere doloremque veritatis a eius. 
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, labore vero. 
+                    Vero, atque, perferendis ullam reprehenderit vitae minima cupiditate officiis corporis quibusdam molestias debitis praesentium. 
+                    Fuga, labore atque. Ipsa, error! 
+                </strong>
             </p>
         </div>
-        <p class="return">return <a href="/">Home</a></p>
     </div>
 </main>
 
-<footer>
-    <div class="copyright">© Copyright 2024 Matheus Motizuki.</div>
-</footer>
+<Footer />
 
-<style>    
+
+<style>
+/* Section: GLobal styling */
+    *{
+        font-family: 'Fragment Mono', monospace;   
+    }
+
+/* Section: Tag Styling */
+
     main {
-        font-family: 'Fragment Mono', monospace;
-        overflow: hidden;
         margin: 0;
         height: 100%;
+        overflow: hidden;
     }
 
-    footer{
-        user-select: none;
-        padding: 40px;
+    h1{
+        margin: 0;
+        font-size: 4em;
+        display: inline;
+        color: #1DB954;
         text-align: center;
-        font-family: 'Fragment Mono', monospace;
-    }
-    
-    .copyright{
-        color: #aaa;
-        padding: 20px;
-        font-size: 1.5em;
-        display: inline-block;
-        border-top: 1px solid #ddd;
+        margin-bottom: 0.3em;
     }
 
-    .about-container{
-        height: calc(80vh + 30px);
+    strong{
+        color: #2c45b8;
+    }
+
+    p{
+        color: #fff;
+        font-size: 1.5em;
+        text-align: center;
+        width: calc(80vw + 20px);
+    }
+
+/* Section: class styling */
+
+    .main-container {
+        height: 100vh;
         display: flex;
         align-items: center;
         flex-direction: column;
         justify-content: center;
-        padding-top: 20px;
-        margin: 0 auto;
-        text-align: center;
     }
 
-    .about-container h1{
-        color: #1DB954;
+    .description-container{
+        display: flex;
+        overflow: auto;
         user-select: none;
+        max-height: calc(50vh - 80px);
     }
 
-    .return {
-        font-size: 1em;
-        padding-top: 40px;
-        text-align: center;
-    }
-
-    .lorem-container {
-        padding: 20px;
-        max-height: 60vh;
-        overflow-y: auto;
-        max-width: 60vw;
-    }
-    
-    .about-container p{
-        margin: 0;
-        overflow-y: auto;
-        color: #ff3e00;
-        user-select: none;
-        text-align: center;
-    }
-
-    .about-container a{
+    .mobile{
         color: #fff;
     }
-    
+
+    .desktop{
+        color: crimson;
+        text-decoration: none;
+    }
+
+    .desktop:hover{
+        text-decoration: underline;
+    }
+
+    .fly {
+        top: 100px;
+        position: absolute;
+        animation: flyAcross 15s linear infinite;
+        animation: flySineWave 5s linear infinite;
+    }
+
+
+    @keyframes flySineWave {
+        0% {
+            left: 0;
+            transform: translateY(0);
+        }
+        25% {
+            transform: translateY(-30px);
+        }
+        50% {
+            left: 50%;
+            transform: translateY(0);
+        }
+        75% {
+            transform: translateY(20px);
+        }
+        100% {
+            left: 100%;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes flyAcross {
+        0% {
+        transform: translateX(-10vw);
+        }
+        100% {
+        transform: translateX(110vw);
+        }
+    }
+
 </style>

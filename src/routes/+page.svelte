@@ -129,28 +129,28 @@
     }
 
 /* Section: before */
-/* 
+
     p span::before{
-        content: "Μουσική?";
         color: crimson;
+        content: "Μουσική?";
         animation: words 20s infinite;
     } 
-*/
+
 /* Section: After */
-/* 
+
     p span::after{
         content: "";
+        right: -8px;
+        height: 100%;
         position: absolute;
         width: calc(100% + 8px);
-        height: 100%;
-        background-color: rgb(15, 15, 15);
         border-left: 2px solid crimson;
-        right: -8px;
+        background-color: rgb(15, 15, 15);
         animation: cursor .8s infinite, typing 20s steps(14) infinite;
-    } */
+    }
 
 /* Section: Animations */
-/* 
+
     @keyframes cursor{
         to{
             border-left: 2px solid rgb(15, 15, 15);
@@ -167,11 +167,11 @@
             font-size: 1em;
         }
         41%, 60%{
-            content: "歌ですか？";
+            content: "音楽？";
             font-size: 0.8em;
         }
         61%, 80%{
-            content: "Chanson?";
+            content: "Musique?";
             font-size: 1em;
         }
         81%, 100%{
@@ -187,6 +187,6 @@
         5%,20%,25%,40%,45%,60%,65%,80%,85%{
             width: calc(100% + 8px);
         }
-    } */
+    }
 
 </style>
