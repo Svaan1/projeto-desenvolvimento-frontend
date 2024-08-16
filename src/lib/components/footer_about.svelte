@@ -29,6 +29,7 @@
     }
 
     .copyright {
+        color: grey;
         font-size: 1.5em;
         text-align: center;
         text-decoration: underline;
