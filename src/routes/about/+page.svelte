@@ -1,6 +1,6 @@
 <script>
 </script>
-
+<!-- TODO: fix this page -->
 <main>
     <div class="about-container">
         <h1><strong>About this site</strong></h1>
@@ -49,7 +49,7 @@
                 Ut pretium sapien ac massa vulputate, non gravida mi congue.
             </p>
         </div>
-        <p>return <a href="/">Home</a></p>
+        <p class="return">return <a href="/">Home</a></p>
     </div>
 </main>
 
@@ -57,13 +57,12 @@
     <div class="copyright">© Copyright 2024 Matheus Motizuki.</div>
 </footer>
 
-<style>
-    *{
-        overflow:hidden;
-    }
-    
+<style>    
     main {
         font-family: 'Fragment Mono', monospace;
+        overflow: hidden;
+        margin: 0;
+        height: 100%;
     }
 
     footer{
@@ -72,6 +71,7 @@
         text-align: center;
         font-family: 'Fragment Mono', monospace;
     }
+    
     .copyright{
         color: #aaa;
         padding: 20px;
@@ -81,29 +81,40 @@
     }
 
     .about-container{
-        height: 80vh;
+        height: calc(80vh + 30px);
         display: flex;
-        margin: 0 auto;
         align-items: center;
         flex-direction: column;
         justify-content: center;
+        padding-top: 20px;
+        margin: 0 auto;
+        text-align: center;
     }
 
     .about-container h1{
-        user-select: none;
         color: #1DB954;
+        user-select: none;
+    }
+
+    .return {
+        font-size: 1em;
+        padding-top: 40px;
+        text-align: center;
     }
 
     .lorem-container {
-        text-align: center;
-        max-width: 80%; /* Adjust the max-width as needed */
-        padding: 20px; /* Optional: add padding around the text */
+        padding: 20px;
+        max-height: 60vh;
+        overflow-y: auto;
+        max-width: 60vw;
     }
-
+    
     .about-container p{
         margin: 0;
-        user-select: none;
+        overflow-y: auto;
         color: #ff3e00;
+        user-select: none;
+        text-align: center;
     }
 
     .about-container a{
