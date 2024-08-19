@@ -36,10 +36,15 @@
 
     img {
         max-width: 80vw;
-        max-height: 60vh; /* Adjust image size to prevent it from taking too much vertical space */
-        height: auto;
-        width: auto;
-        margin-bottom: 10px;
+        max-height: 60vh;
+    }
+
+    .error-container h1,
+    .error-container span,
+    .error-container a,
+    .error-container h2,
+    .error-container p{
+        user-select: none;
     }
 
     .error-container {
@@ -57,49 +62,43 @@
 
     .error-container h1 {
         color: #1DB954;
-        user-select: none;
     }
 
     .error-container span {
         color: #fff;
-        user-select: none;
-        margin-bottom: 15px;
     }
 
     .error-container a {
-        user-select: none;
         color: crimson;
         text-decoration: underline;
     }
 
     .error-container h2 {
         color: #2c45b8;
-        margin-top: 10px;
-        margin-bottom: 0;
-        user-select: none;
     }
 
     .error-container p {
         color: #fff;
-        user-select: none;
     }
 
     .error-500-container {
-        gap: 10px;
         display: flex;
-        flex-wrap: wrap;
         align-items: center;
+        justify-content: space-between;
     }
 
     .error-500-container span {
-        flex: 1;
-        margin-bottom: 100px;
+        margin-bottom: 70px;
     }
     
-    .error-500-container p{
+    .error-500-container p {
         display: inline;
         font-size: 5em;
         font-family: "Monsieur La Doulaise", cursive;
+    }
+
+    .error-500-container img {
+        width: calc(60% + 20px);
     }
 
 </style>

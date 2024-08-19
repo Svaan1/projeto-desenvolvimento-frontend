@@ -1,5 +1,5 @@
 <script>
-    import Footer from '../../lib/components/footer_about.svelte';
+    import Footer from '../../lib/components/about/footer.svelte';
     import { onMount } from 'svelte';
 
     let isMobile = false;
@@ -68,7 +68,7 @@
     }
 
     strong{
-        color: #2c45b8;
+        color: #2d46b9;
     }
 
     p{
@@ -100,7 +100,7 @@
     }
 
     .desktop{
-        color: crimson;
+        color: #ee2b2a;
         text-decoration: none;
     }
 

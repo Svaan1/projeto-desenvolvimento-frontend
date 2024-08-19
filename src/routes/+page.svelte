@@ -37,29 +37,27 @@
 /* Section: Tag Styling */
 
     main {
-        overflow: hidden;
-        margin: 0;
-        height: 100%;
+        min-height: 100vh;
     }
 
     h1{
         color: #fff;
-        display: flex;
         font-size: 4em;
         text-align: center;
         margin-bottom: 0.3em;
     }
 
-    h2 {
-        color: #1DB954;
-        margin-bottom: 0;
+    h2,
+    p {
         user-select: none;
     }
 
+    h2 {
+        color: #1DB954;
+    }
+
     p{
-        user-select: none;
         color: #fff;
-        display: flex;
         font-size: 1.5em;
         text-align: center;
     }
@@ -71,8 +69,8 @@
 /* Section: class styling */
 
     .container {
-        height: 100vh;
         display: flex;
+        min-height: 100vh;
         align-items: center;
         flex-direction: column;
         justify-content: center;
@@ -80,21 +78,16 @@
 
     .image-container {
         display: flex;
-        overflow: hidden;
         align-items: center;
-        flex-direction: row;
-        justify-content: center;
     }
 
     .spotify {
-        user-select: none;
         width: 100px;
-        margin-right: 0px;
+        user-select: none;
     }
 
     .login {
         height: 55px;
-        color: #000;
         display: flex;
         font-size: 1em;
         cursor: pointer;
@@ -103,17 +96,15 @@
         border-radius: 10px;
         border-style: groove;
         text-decoration: underline;
-        background-color: #ffffff;
+        background-color: #fff;
         box-shadow: 0px 0px #0c702f;
         transition: box-shadow 0.2s ease;
-        flex-shrink: 0;
-        margin-top: 20px;;
     }
 
     .icon{
+        color: #000;
         font-size: 1.5em;
         margin-left: 0.3rem;
-        color: #000;
     }
 
 /* Section: Hovers */
@@ -131,7 +122,7 @@
 /* Section: before */
 
     p span::before{
-        color: crimson;
+        color: #ee2b2a;
         content: "Μουσική?";
         animation: words 20s infinite;
     } 
@@ -144,7 +135,7 @@
         height: 100%;
         position: absolute;
         width: calc(100% + 8px);
-        border-left: 2px solid crimson;
+        border-left: 2px solid #ee2b2a;
         background-color: rgb(15, 15, 15);
         animation: cursor .8s infinite, typing 20s steps(14) infinite;
     }
