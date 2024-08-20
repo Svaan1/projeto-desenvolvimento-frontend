@@ -1,5 +1,5 @@
 <script>
-    import Footer from '../lib/components/footer.svelte'
+    import Footer from '$components/footer.svelte'
 
     const handleClick = () => {
         console.log("clicked!");

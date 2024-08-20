@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import Button from '../../lib/components/home/button.svelte';
+    import Button from '$components/button.svelte';
     
     let user = 'Hello, World!';
     let buttons = [

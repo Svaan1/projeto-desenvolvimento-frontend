@@ -1,6 +1,6 @@
 <script>
     import { goto } from '$app/navigation';
-    import Modal from '../../components/home/modal.svelte'
+    import Modal from '$lib/components/modal.svelte';
 
     export let text;
     export let href;
@@ -43,9 +43,9 @@
 	</h2>
 
     <div class="button-row">
-        <button class="test">Join Session</button>
+        <button class="join-session">Join Session</button>
         <div class="vertical"></div>
-        <button class="test">Create New Session</button>
+        <button class="create-session">Create New Session</button>
     </div>
 
 </Modal>
@@ -64,12 +64,13 @@
 
     .vertical {
         width: 1px;
-        height: 24px; /* Adjust height as needed */
-        background-color: #000; /* Adjust color as needed */
-        margin: 0 8px; /* Adjust spacing as needed */
+        height: 24px;
+        background-color: #000;
+        margin: 0 8px;
     }
 
-    .test {
+    .join-session,
+    .create-session {
         min-height: 25vh;
         padding: 8px 16px;
         font-size: 16px;

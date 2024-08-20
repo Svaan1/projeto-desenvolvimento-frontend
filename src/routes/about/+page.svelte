@@ -1,5 +1,5 @@
 <script>
-    import Footer from '../../lib/components/about/footer.svelte';
+    import Footer from '$components/footer_about.svelte';
     import { onMount } from 'svelte';
 
     let isMobile = false;
