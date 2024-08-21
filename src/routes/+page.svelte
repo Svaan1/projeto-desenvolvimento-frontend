@@ -41,6 +41,7 @@
     }
 
     h1{
+        margin: 0;
         color: #fff;
         font-size: 4em;
         text-align: center;
@@ -53,16 +54,19 @@
     }
 
     h2 {
+        margin: 0;
         color: #1DB954;
     }
 
     p{
+        margin-top: 0;
         color: #fff;
         font-size: 1.5em;
         text-align: center;
     }
 
     p span{
+        margin-top: 0;
         position: relative;
     }
 
@@ -70,7 +74,7 @@
 
     .container {
         display: flex;
-        min-height: 100vh;
+        min-height: 90vh;
         align-items: center;
         flex-direction: column;
         justify-content: center;
