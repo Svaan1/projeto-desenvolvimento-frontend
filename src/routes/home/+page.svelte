@@ -1,7 +1,7 @@
 <script>
     let user = 'Hello, World!';
 
-    import Button from '../../lib/components/home/button.svelte';
+    import Button from '$components/home/button.svelte';
 
     let buttons = [
         { text: "Game 1", href: "/game-1" },

@@ -1,6 +1,6 @@
 <script>
     import { goto } from '$app/navigation';
-    import Modal from '$lib/components/modal.svelte';
+    import Modal from '../components/modal.svelte';
 
     export let text;
     export let href;
