@@ -2,8 +2,7 @@
     import Footer from '$components/footer.svelte'
 
     const handleClick = () => {
-        console.log("clicked!");
-        window.location.href = "/home"
+        window.location.href = "/auth/login"
     }
 </script>
 
