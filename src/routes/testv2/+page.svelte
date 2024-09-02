@@ -2,13 +2,13 @@
     import { onMount } from 'svelte';
     import Button from '$components/button.svelte';
     
-    let user = 'Hello, World!';
+    let user = 'Spotifydle';
     let buttons = [
         { text: "Guess the song", href: "/gts", showModal: false },
         { text: "Guess the song [🔥 HARDCORE 🔥]", href: "/gts/h", showModal: false },
         { text: "Guess the listener", href: "/gtl", showModal: true },
-        // { text: "Hello, World!", href: "/helloworld" },
-        // { text: "Hello, World!", href: "/helloworld" },
+        { text: "Hello, World!", href: "/helloworld" },
+        { text: "Hello, World!", href: "/helloworld" },
         // { text: "Hello, World!", href: "/helloworld" },
         // { text: "Hello, World!", href: "/helloworld" },
         // { text: "Hello, World!", href: "/helloworld" },
