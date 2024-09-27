@@ -1,14 +1,48 @@
 <script>
-    export let musicTitle = "hello world";
-    export let musicArtist = "artist name";
+    /** @type {import('./$types').PageData} */
+    export let data;
+
+    let debounceTimer;
+    let currentSearchedValues = [];
+
+    const debounce = async (v) => {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(async () => {
+            if (v) {
+                let response = await fetch(`/api/search?q=${v}&t=track`);
+                if (response.ok) {
+                    let data = await response.json();
+                    currentSearchedValues = data.tracks.items;
+                    return;
+                }
+            }
+            currentSearchedValues = []
+        }, 750);
+    }
+
+    const checkTrack = () => {
+
+    }
 </script>
+
+
+<!--{#each currentSearchedValues as item}
+    <p>
+        <button class="track-item" on:click={() => {checkTrack(item)}}>
+            <img src={item.album.images[2].url} alt="">
+            {item.name}
+            {item.album.artists[0].name}
+        </button>
+    </p>
+
+{/each}-->
 
 <div class="outer-container">
     <div class="top-text">
         <h3>I think today music is </h3>
     </div>
     <div class="search-bar">
-        <input type="text" class="search-input">
+        <input type="text" class="search-input" on:keyup={({ target: { value } }) => debounce(value)}>
         <button class="search-btn">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...$$props}>
                 <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
@@ -22,13 +56,13 @@
             </svg>
         </button>
     </div>
-    <div class="iner-container">
+    <div class="inner-container">
         <div class="music-thumb">
-            <img src="https://via.placeholder.com/150" alt="music-thumb">
+            <img src={data.music.album.image} alt="music-thumb">
         </div>
         <div class="music-related">
-            <h3>{musicTitle}</h3>
-            <p>{musicArtist}</p>
+            <h3>{data.music.track.name}</h3>
+            <p>{data.music.artists[0].name}</p>
         </div>
     </div>
 </div>
@@ -136,7 +170,7 @@
         transition: transform 0.1s;
     }
 
-    .iner-container{
+    .inner-container{
         border: 1px solid white;
         width: 50%;
         height: 70%;
@@ -149,14 +183,18 @@
     }
 
     .music-thumb{
-        width: 200px;
-        height: 200px;
+
         display: flex;
         align-items: center;
         flex-direction: row;
         justify-content: center;
         background-color: rgb(0, 0, 255);
-        animation: spin 0.8s linear infinite;
+
+    }
+
+    .music-thumb img {
+        width: 200px;
+        height: 200px;
     }
 
     @keyframes spin {
