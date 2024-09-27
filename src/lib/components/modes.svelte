@@ -1,6 +1,9 @@
 <script>
     // bottom_text: "daily new artists", description: "The artist quiz you can't resist"},
 
+    import { goto } from '$app/navigation';
+    import Modal from './modal.svelte';
+
     export let outer_color = "#fff";
     export let inner_color = "#808";
     export let mode_text = "mode";
@@ -10,14 +13,89 @@
     export let bottom_text_color = "black";
     export let description_color = "gray";
     export let current_game_page = "/";
+    export let modifiable_text_font = "70px";
+
+    export let isMultiPlayer = false;
+
+    let showModal = false;
+
+    function handleClick() {
+        isMultiPlayer ? showModal = !showModal : goto(current_game_page);
+    }
 
 </script>
 
-<a class="main" href={current_game_page}>
+<Modal bind:showModal>
+    <div class="side-container">
+        <h3>Choose a option to play</h3>
+        <div class="button-container">
+            <button class="single-player" on:click={() => goto()}>Create session</button>
+            <button class="multi-player" on:click={() => goto()}>Join session</button>
+        </div>
+        <p class="bottom-message-modal">Friends are required to play online.</p>
+    </div>
+<style>
+    
+    .side-container{
+        padding: 2%;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .side-container h3{
+        color: white;
+    }
+
+    .button-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .single-player{
+        width: 195px;
+        height: 70px;
+        background-color: #1ED760;
+        color: black;
+        border: none;
+        border-radius: 50px;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .multi-player{
+        width: 230px;
+        height: 80px;
+        background-color: transparent;
+        border: 1px solid white;
+        color: white;
+        border-radius: 50px;
+        margin: 10px;
+        cursor: pointer;
+    }
+
+    .bottom-message-modal{
+        text-align: start;
+        font-size: 1em;
+        color: gray;
+    }
+    
+</style>
+</Modal>
+
+
+<button class="main" on:click={() => goto(current_game_page), handleClick}>
     <div class="main-container" style="background-color: {outer_color}">
         <div class="inner-container" style="background-color: {inner_color}">
             <h3 class="inner-text" style="color: {text_color}">Guess the</h3>
-            <h3 class="modifiable-text" style="color: {bottom_text_color}">{mode_text}</h3>
+            <div class="modifiable-text-container">
+                <h3 class="modifiable-text" style="color: {bottom_text_color}; font-size: {modifiable_text_font};">{mode_text}</h3>
+            </div>
             <div class="bottom-container">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" style="color: {text_color}" {...$$props}>
                     <g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
@@ -34,31 +112,31 @@
             </p>
         </div>
     </div>
-</a>
+</button>
 
 <style>
 
+    *{
+        font-family: "Rubik Mono One", monospace;
+        font-weight: 400;
+        font-style: normal;
+    }
+
     .main{
+        border: none;
         cursor: pointer;
         text-decoration: none;
+        background-color: transparent;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     .main:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    }
-
-    @keyframes pop {
-        0% {
-            transform: translateY(0);
-        }
-        100% {
-            transform: translateY(-5px);
-        }
+        transform: translateY(-25px);
     }
 
     .main-container{
+        margin: 0;
+        padding: 0;
         width: 350px;
         height: 400px;
         display: flex;
@@ -68,6 +146,8 @@
     }
 
     .inner-container{
+        margin: 0;
+        padding: 0;
         width: 90%;
         display: flex;
         margin-top: 5%;
@@ -80,11 +160,15 @@
         font-size: 60px;
         margin-bottom: 0;
     }
+    
+    .modifiable-text-container{
+        width: 60%;
+        display: fixed;
+    }
 
     .modifiable-text{
-        margin: 6%;
+        margin: 5%;
         margin-top: 0;
-        font-size: 68px;
         font-family: "Rubik Glitch", system-ui;
     }
 

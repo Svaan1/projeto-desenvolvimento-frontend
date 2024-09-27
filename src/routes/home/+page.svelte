@@ -2,10 +2,10 @@
     import Modes from '$components/modes.svelte';
     
     let modes =[
-        {outer_color: "#003D38", inner_color: "#016450", mode_text: "Artist", bottom_text: "daily new artists", description: "The artist quiz you can't resist", text_color: "#F6D0D0", bottom_text_color: "rgba(245, 208, 208, 0.7)", description_color: "#F6D0D0", current_game_page: "/artist", isMultiPLayer: false},
-        {outer_color: "#ffa60d", inner_color: "#FFC70D", mode_text: "Album", bottom_text: "daily new albums", description: "The album quiz you can't resist", text_color: "#0E0E0E", bottom_text_color: "rgba(14, 14, 14, 0.7)",  description_color: "#0E0E0E", current_game_page: "/album", isMultiPLayer: false},
-        {outer_color: "#A60F1D", inner_color: "#EC1E32", mode_text: "Music", bottom_text: "daily new musics", description: "The music quiz you can't resist", text_color: "#FFFFFF", bottom_text_color: "rgba(255, 255, 255, 0.7)",  description_color: "#FFFFFF", current_game_page: "/music", isMultiPLayer : false},
-        {outer_color: "#606060", inner_color: "#808080", mode_text: "Listener", bottom_text: "better with friends", description: "We are not responsible for any internal fights.", text_color: "#FFFF99", bottom_text_color: "rgba(255, 255, 153, 0.7)",  description_color: "#FFFF99", current_game_page: "/music", isMultiPLayer: true},
+        {outer_color: "#003D38", inner_color: "#016450", mode_text: "Artist", modifiable_text_font: "70px", bottom_text: "daily new artists", description: "The artist quiz you can't resist", text_color: "#F6D0D0", bottom_text_color: "rgba(245, 208, 208, 0.7)", description_color: "#F6D0D0", current_game_page: "/artist", isMultiPlayer: false},
+        {outer_color: "#ffa60d", inner_color: "#FFC70D", mode_text: "Album", modifiable_text_font: "70px", bottom_text: "daily new albums", description: "The album quiz you can't resist", text_color: "#0E0E0E", bottom_text_color: "rgba(14, 14, 14, 0.7)",  description_color: "#0E0E0E", current_game_page: "/album", isMultiPlayer: false},
+        {outer_color: "#A60F1D", inner_color: "#EC1E32", mode_text: "Music", modifiable_text_font: "70px", bottom_text: "daily new musics", description: "The music quiz you can't resist", text_color: "#FFFFFF", bottom_text_color: "rgba(255, 255, 255, 0.7)",  description_color: "#FFFFFF", current_game_page: "/music", isMultiPlayer : false},
+        {outer_color: "#606060", inner_color: "#808080", mode_text: "Listener", modifiable_text_font: "60px", bottom_text: "better with friends", description: "We are not responsible for any internal fights.", text_color: "#FFFF99", bottom_text_color: "rgba(255, 255, 153, 0.7)",  description_color: "#FFFF99", current_game_page: "/music", isMultiPlayer: true},
     ]
 
     let user = "tua mae";
@@ -23,8 +23,9 @@
             {#each modes as mode}
             <Modes outer_color={mode.outer_color} inner_color={mode.inner_color} mode_text={mode.mode_text} 
             bottom_text={mode.bottom_text} description={mode.description} text_color={mode.text_color} 
-            bottom_text_color={mode.bottom_text_color} description_color={mode.description_color} 
-            current_game_page={mode.current_game_page} isMultiPLayer={mode.isMultiPLayer}/>
+            modifiable_text_font={mode.modifiable_text_font} bottom_text_color={mode.bottom_text_color} 
+            description_color={mode.description_color} current_game_page={mode.current_game_page}
+            isMultiPlayer={mode.isMultiPlayer}/>
             {/each}
         </div>
     </div>
