@@ -31,7 +31,9 @@
 <style>
 /* Section: GLobal styling */
     *{
-        font-family: 'Fragment Mono', monospace;   
+        font-family: "Rubik Mono One", monospace;
+        font-weight: 400;
+        font-style: normal; 
     }
 
 /* Section: Tag Styling */
