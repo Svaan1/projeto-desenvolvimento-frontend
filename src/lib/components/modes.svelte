@@ -12,6 +12,7 @@
     export let current_game_page = "/";
 
 </script>
+
 <a class="main" href={current_game_page}>
     <div class="main-container" style="background-color: {outer_color}">
         <div class="inner-container" style="background-color: {inner_color}">
