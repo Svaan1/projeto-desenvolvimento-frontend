@@ -5,7 +5,7 @@ export async function GET({ url }) {
     const urlSearchParams = url.searchParams;
 
 
-    const uri = `http://localhost:8080/search?q=${urlSearchParams.get('q')}&t=${urlSearchParams.get(('t'))}`;
+    const uri = import.meta.env.VITE_BACKEND_URL + `search?q=${urlSearchParams.get('q')}&t=${urlSearchParams.get(('t'))}`;
 
     let request = await fetch(uri)
     let data = await request.json();

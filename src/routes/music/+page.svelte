@@ -25,18 +25,6 @@
     }
 </script>
 
-
-<!--{#each currentSearchedValues as item}
-    <p>
-        <button class="track-item" on:click={() => {checkTrack(item)}}>
-            <img src={item.album.images[2].url} alt="">
-            {item.name}
-            {item.album.artists[0].name}
-        </button>
-    </p>
-
-{/each}-->
-
 <div class="outer-container">
     <div class="top-text">
         <h3>I think today's music is</h3>
@@ -69,6 +57,17 @@
             </div>
         </div>
     {/if}
+
+    {#each currentSearchedValues as item}
+        <p>
+            <button class="track-item" on:click={() => {checkTrack(item)}}>
+                <img src={item.album.images[2].url} alt="">
+                {item.name}
+                {item.album.artists[0].name}
+            </button>
+        </p>
+    {/each}
+
 
 </div>
 
