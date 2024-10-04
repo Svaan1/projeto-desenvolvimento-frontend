@@ -101,6 +101,8 @@
     </div>
   </div>
 
+  // If the music data is not null, display the music data
+
   {#if data.music.message == null}
     <div class="inner-container">
       <div
