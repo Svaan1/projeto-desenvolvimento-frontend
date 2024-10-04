@@ -39,7 +39,7 @@
 
 <div class="outer-container">
     <div class="top-text">
-        <h3>I think today music is </h3>
+        <h3>I think today's music is</h3>
     </div>
     <div class="search-bar">
         <input type="text" class="search-input" on:keyup={({ target: { value } }) => debounce(value)}>
@@ -56,15 +56,20 @@
             </svg>
         </button>
     </div>
-    <div class="inner-container">
-        <div class="music-thumb">
-            <img src={data.music.album.image} alt="music-thumb">
+    
+
+    {#if data.music.message == null}
+        <div class="inner-container">
+            <div class="music-thumb">
+                <img src={data.music.album.image} alt="music-thumb">
+            </div>
+            <div class="music-related">
+                <h3>{data.music.track.name}</h3>
+                <p>{data.music.artists[0].name}</p>
+            </div>
         </div>
-        <div class="music-related">
-            <h3>{data.music.track.name}</h3>
-            <p>{data.music.artists[0].name}</p>
-        </div>
-    </div>
+    {/if}
+
 </div>
 
 <style>
