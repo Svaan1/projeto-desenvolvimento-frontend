@@ -1,22 +1,23 @@
-# create-svelte
+# Spotify Game Guesser
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Small project focused on creating a spotify song game guesser, powered by [`svelte`](https://svelte.dev/).
 
-## Creating a project
+# Pre-requisites
+- < `npm` or `yarn` > 
+- < Svelte >
+- < Some IDE or vscode >
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Clone project
+You know the drill
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+# Start by cloning the project in the desired directory
+git clone https://github.com/MatheusMotizuki/spotify-guess
 ```
 
 ## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `npm i` or `yarn`), start a development server:
 
 ```bash
 npm run dev
@@ -35,4 +36,4 @@ npm run build
 
 You can preview the production build with `npm run preview`.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+> In case of any bugs, good luck :)
