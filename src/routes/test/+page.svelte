@@ -16,6 +16,9 @@
     let debounceTimer;
     let musics = [];
 
+    let tries = [];
+    tries = new Array(10).fill(null);
+
     let isFocused = false;
     let guessedCorrectly = false;
 
@@ -65,7 +68,7 @@
     };
 
     let audio;
-    let audioVolume = 0.7;
+    let audioVolume = 0.1;
     let isPlaying = false;
     let mute_audio = false;
 
@@ -166,14 +169,22 @@ Your browser does not support the audio tag.
                     </g>
                 </svg>
             </button>
-            <button on:click={play_or_stop} class="play_or_stop">
-                <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" {...$$props}>
-                    <g fill="none" stroke="white" stroke-width="1">
-                        <circle cx="12" cy="12" r="10" />
-                        <path d="M15.414 10.941c.781.462.781 1.656 0 2.118l-4.72 2.787C9.934 16.294 9 15.71 9 14.786V9.214c0-.924.934-1.507 1.694-1.059z" />
-                    </g>
-                </svg>
-            </button>
+            {#if isPlaying}
+                <button on:click={play_or_stop} class="play">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" {...$$props}>
+                        <g fill="none" stroke="white" stroke-width="1">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M15.414 10.941c.781.462.781 1.656 0 2.118l-4.72 2.787C9.934 16.294 9 15.71 9 14.786V9.214c0-.924.934-1.507 1.694-1.059z" />
+                        </g>
+                    </svg>
+                </button>
+            {:else}
+                <button on:click={play_or_stop} class="stop">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 20 20" {...$$props}>
+                        <path fill="white" d="M10 3a7 7 0 1 0 0 14a7 7 0 0 0 0-14m-8 7a8 8 0 1 1 16 0a8 8 0 0 1-16 0m5-2a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z" />
+                    </svg>
+                </button>
+            {/if}
             <button on:click={move_five} class="move_five">
                 <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 24 24" {...$$props}>
                     <g fill="none" stroke="white" stroke-linecap="round" stroke-width="1">
@@ -200,7 +211,7 @@ Your browser does not support the audio tag.
                     </svg>
                 </button>
             {/if}
-            <input type="range" class="range-bar" min="0" max="1" step="0.01" bind:value={audioVolume} on:input={() => { if (audio) audio.volume = audioVolume; }} />
+            <input type="range" class="range-bar" min="0" max="1" step="0.01" bind:value={audioVolume} on:input={() => { if (!mute_audio) if (audio) audio.volume = audioVolume; }} />
         </div>
         <div class="bar-container">
             <progress class="progress-bar" value={current_time} max={total_time}></progress>
@@ -229,6 +240,8 @@ Your browser does not support the audio tag.
         right: 0;
         width: 55%;
         max-width: 55%;
+        padding-right: 0;
+        margin-right: 0;
         min-height: 90vh;
         max-height: 90vh;
         display: flex;
@@ -239,7 +252,7 @@ Your browser does not support the audio tag.
         overflow-y: auto;
         overflow-x: hidden;
         padding: 30px;
-        margin-top: 10px;
+        margin-top: 20px;
         box-shadow: inset 0 0 20px rgba(0, 0, 0, 1);
     }
 
@@ -341,14 +354,42 @@ Your browser does not support the audio tag.
         margin-top: 20px;
         border-radius: 10px;
         background-color: #141414;
+        border: none;
     }
 
     .progress-bar::-webkit-progress-bar {
+        border-color: transparent;
         background-color: #141414;
     }
 
     .progress-bar::-webkit-progress-value {
+        border-color: transparent;
         background-color: #1ED760;
+    }
+
+    .progress-bar::-moz-progress-bar {
+        border: none;
+        background-color: #1ED760;
+    }
+
+    .play:active {
+        transform: scale(0.9);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .stop:active {
+        transform: scale(1.1);
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .move_five:active {
+        transform: scale(0.8);
+        transition: transform 0.05s ease-in-out;
+    }
+
+    .return_five:active {
+        transform: scale(0.8);
+        transition: transform 0.05s ease-in-out;
     }
 
     .volume{
@@ -376,45 +417,6 @@ Your browser does not support the audio tag.
 
     input[type=range] {
         width: 100%;
-        margin: 0;
-        padding: 0;
-        background: transparent;
-    }
-
-    /* Track styling */
-    input[type=range]::-webkit-slider-runnable-track {
-        width: 100%;
-        height: 15px;
-        background-color: #141414; /* Background color */
-    }
-
-    /* Thumb (slider button) styling for Webkit browsers (Chrome, Safari) */
-    input[type=range]::-webkit-slider-thumb {
-        -webkit-appearance: none;
-        appearance: none;
-        width: 20px; /* Size of the thumb */
-        height: 20px;
-        background-color: #FF4500; /* Thumb color */
-        border-radius: 50%; /* Rounded thumb */
-        cursor: pointer;
-    }
-
-    /* For Firefox */
-    input[type=range]::-moz-range-thumb {
-        width: 20px;
-        height: 20px;
-        background-color: #FF4500; /* Thumb color */
-        border-radius: 50%;
-        cursor: pointer;
-    }
-
-    /* For Internet Explorer */
-    input[type=range]::-ms-thumb {
-        width: 20px;
-        height: 20px;
-        background-color: #FF4500; /* Thumb color */
-        border-radius: 50%;
-        cursor: pointer;
     }
 
 </style>

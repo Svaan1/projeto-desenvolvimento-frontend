@@ -5,7 +5,7 @@
     import { page } from '$app/stores';
     import Modal from './modal_music.svelte';
 
-    export let isMultiPlayer = false;
+    // export let isMultiPlayer = false;
 
     export let banner = "https://static.vecteezy.com/system/resources/previews/014/989/719/original/question-mark-hand-drawn-doodle-faq-symbol-free-vector.jpg";
     export let music_name = "song name";
@@ -13,8 +13,6 @@
 
     export let music_date = "2020-12-31";
 
-    
-    
     let display_correct_icon = "none";
     let is_near_music_color_date = "black";
 
@@ -70,12 +68,12 @@
                         <h2 style="color: {is_near_music_color_date};">{music_date}</h2>
 <!-- UP ARROW -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...$$props}>
-                            <g fill="none" style="display: {display_down_arrow}; color: {is_near_music_color_date};">
+                            <g fill="none" style="display: {display_up_arrow}; color: {is_near_music_color_date};">
                                 <path d="M24 0v24H0V0zM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.019-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z" />
                                 <path fill="currentColor" d="M13.06 3.283a1.5 1.5 0 0 0-2.12 0L5.281 8.939a1.5 1.5 0 0 0 2.122 2.122L10.5 7.965V19.5a1.5 1.5 0 0 0 3 0V7.965l3.096 3.096a1.5 1.5 0 1 0 2.122-2.122z" />
                             </g>
                         </svg>
-<!-- DOWN ARROW-->
+<!-- DOWN ARROW -->
                         <svg style="display: {display_down_arrow}; color: {is_near_music_color_date}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...$$props}>
                             <path fill="currentColor" fill-rule="evenodd" d="M12 3.25a.75.75 0 0 1 .75.75v14.19l4.72-4.72a.75.75 0 1 1 1.06 1.06l-6 6a.75.75 0 0 1-1.06 0l-6-6a.75.75 0 1 1 1.06-1.06l4.72 4.72V4a.75.75 0 0 1 .75-.75" clip-rule="evenodd" />
                         </svg>
@@ -83,7 +81,7 @@
                         <svg style="display: {display_correct_icon}; color: {is_near_music_color_date}" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48" {...$$props}>
                             <path fill="currentColor" fill-rule="evenodd" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="m4 24l5-5l10 10L39 9l5 5l-25 25z" clip-rule="evenodd" />
                         </svg>
-                    </div>
+                    </div> 
                 <div class="artist-container">
                     <h2>{artist_name}</h2>
                 </div>
@@ -222,11 +220,6 @@
         flex-direction: column;
         align-items: flex-start;
         flex-direction: row;
-    }
-
-    .time svg{
-        margin: 0;
-        padding: 0;
     }
 
     .time h2{
