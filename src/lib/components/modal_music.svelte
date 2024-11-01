@@ -10,32 +10,29 @@
 <dialog
 	bind:this={dialog}
 	on:close={() => (showModal = false)}
-	on:click|self={() => dialog.close()}
->
+	on:click|self={() => dialog.close()}>
+
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
 	<div on:click|stopPropagation>
 		<slot />
 		<!-- svelte-ignore a11y-autofocus -->
 		<div class="close-container">
-            <button class="close-btn" autofocus on:click={() => dialog.close()}>return</button>
+            <button class="close-btn" autofocus on:click={() => dialog.close()}>Don't confirm</button>
         </div>
 	</div>
 </dialog>
 
 <style>
 	dialog {
-		min-width: auto;
+		width: 20vw;
 		padding: 0;
 		border: none;
-		border-radius: 30px;
-		background-color: transparent;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		margin: auto;
+		/* border-radius: 30px; */
+        background-color: #191414;
 	}
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.7);
+		backdrop-filter: blur(5px);
 	}
 	dialog > div {
 		padding: 2em;
@@ -64,20 +61,16 @@
 	}
 	.close-container {
 		display: flex;
-		justify-content: center;
+        justify-content: center;
 	}
 
-	.close-btn {
+	.close-btn{
 		border: none;
 		background-color: transparent;
 		color: white;
-		padding: 10px 20px;
 		cursor: pointer;
 		font-size: 1em;
 		font-weight: 600;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;
-	}
-	.close-btn:hover {
-		transform: scale(1.05); /* Slightly scale on hover for effect */
 	}
 </style>

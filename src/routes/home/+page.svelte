@@ -33,33 +33,20 @@
 
 <style>
 
-    * {
+    :global(body) {
+        background-color: rgb(15, 15, 15);
         font-family: "Rubik Mono One", monospace;
         font-weight: 400;
         font-style: normal;
+        overflow: hidden;
     }
 
-    main {
-        width: 100vw;
-        display: flex;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-        background-color: rgb(14, 14, 14);
-    }
-    
     .main-container {
-        width: 98%;
         display: flex;
-        min-height: 98vh;
-        overflow-x: hidden;
-        position: relative;
         align-items: center;
-        border-radius: 25px;
         flex-direction: column;
         justify-content: center;
-        background-color: #191414;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        height: 100vh;
     }
 
     .header-text {

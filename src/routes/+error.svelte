@@ -24,6 +24,14 @@
 
 <style>
 
+    :global(body) {
+        background-color: rgb(15, 15, 15);
+        font-family: "Rubik Mono One", monospace;
+        font-weight: 400;
+        font-style: normal;
+        overflow: hidden;
+    }
+
     * {
         margin: 0;
         padding: 0;

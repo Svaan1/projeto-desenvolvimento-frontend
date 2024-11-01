@@ -1,5 +1,4 @@
 <script>
-    import Footer from '$components/footer_about.svelte';
     import { onMount } from 'svelte';
 
     let isMobile = false;
@@ -40,9 +39,6 @@
         </div>
     </div>
 </main>
-
-<Footer />
-
 
 <style>
 /* Section: GLobal styling */
