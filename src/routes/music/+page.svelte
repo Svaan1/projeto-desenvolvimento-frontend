@@ -8,13 +8,52 @@
     let audioVolume = 0.1;
     let isPlaying = false;
     let mute_audio = false;
+    let guessedCorrectly = false;
 
     let total_time = "00:30";
     let current_time = "00:00";
     let debounceTimer;
     let musics = [];
     let tries = [];
-    let lives = 1;
+    let lives = 10;
+
+    let checkDate = "red";
+
+    let lost;
+    $: if (lives <= 0) {
+        // TODO: change this
+        alert("you lost")
+    }
+
+    function checkName(name1, name2) {
+        if (name1 == name2) {
+            return "green";
+        } 
+
+        return "red";
+    }
+
+    function checkTimeDifference(timeString1, timeString2) {
+        if (timeString1 == timeString2) {
+            return "green"
+        }
+
+        const date1 = new Date(timeString1);
+        const date2 = new Date(timeString2);
+
+        if (isNaN(date1) || isNaN(date2)) {
+            throw new Error("Invalid date string(s)");
+        }
+
+        const timeDifference = Math.abs(date2 - date1);
+        const yearsDifference = timeDifference / (365.25 * 24 * 60 * 60 * 1000);
+
+        if (yearsDifference <= 1) {
+            return "yellow"
+        } else {
+            return "red"
+        }
+    }
 
     async function debounce(v) {
         clearTimeout(debounceTimer);
@@ -32,11 +71,30 @@
     };
 
     const checkTrack = (item) => {
+        if (lives == 0 || guessedCorrectly) {
+            return;
+        }
+
+        if (tries.includes(item)) {
+            //TODO change this
+            alert("Already selected")
+            return;
+        }
+
+        tries = [...tries, item];
+
+        console.log(item)
+
         if (item.album.artists[0].name == data.music.artists[0].name &&
             item.name == data.music.track.name) {
+        
             guessedCorrectly = true;
+            alert("Vocë ganhou")
+            //TODO: change this
+            // TODO: save winning and tries state
+        } else {
+            lives -= 1
         }
-        isFocused = false;
     };
 
     const calc_date_time = (item) => {
@@ -156,69 +214,30 @@
                 <table style="width: 100%; border-collapse: collapse;">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Music</th>
-                            <th>Info</th>
+                            <th style="width: 5%; text-align: center;">#</th>
+                            <th style="width: 25%; text-align: center;">Music</th>
+                            <th style="text-align: center;">Date</th>
+                            <th style="text-align: center;">Artist</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>smells like teen spirit</td>
-                            <td>near</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>whole lotta shakin' going on - remastered 2022</td>
-                            <td>not near</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>sun killer</td>
-                            <td>not near</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>downfall</td>
-                            <td>not near</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>its just a burning memory</td>
-                            <td>near</td>
-                        </tr>
-                        <tr>
-                            <td>6</td>
-                            <td>think of me once in a while, take care</td>
-                            <td>near</td>
-                        </tr>
-                        <tr>
-                            <td>7</td>
-                            <td>duality</td>
-                            <td>not near</td>
-                        </tr>
-                        <tr>
-                            <td>8</td>
-                            <td>king slayer</td>
-                            <td>near</td>
-                        </tr>
-                        <tr>
-                            <td>9</td>
-                            <td>V.A.N</td>
-                            <td>not near</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>my own summer (shove it)</td>
-                            <td>near</td>
-                        </tr>
+                        {#if tries.length > 0}
+                            {#each tries as tr, index}
+                                <tr>
+                                    <td>{10 - tries.indexOf(tr)}</td>
+                                    <td style="color: {checkName(tr.name, data.music.track.name)}">{tr.name}</td>
+                                    <td style="color: {checkTimeDifference(tr.album.release_date, data.music.album.release_date)};">{tr.album.release_date}</td>
+                                    <td style="color: {checkName(tr.album.artists[0].name, data.music.artists[0].name)}">{tr.album.artists[0].name}</td>
+                                </tr>
+                            {/each}
+                        {/if}
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="right">
             {#each musics as music}
-                <div class="musiques">
+                <div class="musiques" on:click={() => {checkTrack(music)}} >
                     <Cards banner={music.album.images[0].url} musicName={music.name} artistName={music.album.artists[0].name} albumName={music.album.name} launch={music.album.release_date} data={data}/>
                 </div>
             {/each}
@@ -226,13 +245,21 @@
     </div>
     <div class="bottom-holder">
 
-        <div class="bottom-left">
-            <img src="https://static.vecteezy.com/system/resources/previews/014/989/719/original/question-mark-hand-drawn-doodle-faq-symbol-free-vector.jpg" width="120px" height="120px" alt="Album cover" class="album-photo">
-            <div class="bottom-text-info">
-                <span> <h2>Correct music</h2> <p>artist name or album name</p> </span>
+        {#if guessedCorrectly}
+            <div class="bottom-left">
+                <img src={data.music.album.image} width="120px" height="120px" alt="Album cover" class="album-photo">
+                <div class="bottom-text-info">
+                    <span> <h2>{data.music.track.name}</h2> <p>{data.music.artists[0].name}</p> </span>
+                </div>
             </div>
-        </div>
-    
+        {:else}
+            <div class="bottom-left">
+                <img src="https://static.vecteezy.com/system/resources/previews/014/989/719/original/question-mark-hand-drawn-doodle-faq-symbol-free-vector.jpg" width="120px" height="120px" alt="Album cover" class="album-photo">
+                <div class="bottom-text-info">
+                    <span> <h2>Correct music</h2> <p>artist name or album name</p> </span>
+                </div>
+            </div>
+        {/if}
         <div class="bottom-center">
             <div class="bottom-controls">
                 <button class="bottom-control-button bottom-back-button" on:click={return_five}>
