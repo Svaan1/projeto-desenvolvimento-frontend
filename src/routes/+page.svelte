@@ -25,7 +25,6 @@
     </div>
 </main>
 <Footer /> 
-<!-- Footer from +footer.svelte -->
 
 <style>
 

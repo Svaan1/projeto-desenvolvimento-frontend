@@ -95,7 +95,7 @@
     </style>
 </Modal>
 
-<button class="clickable" on:click={handleClick}>
+<button class="clickable" on:dblclick={handleClick}>
     <div class="holder">
         <div class="container">
             <div class="photo-container">
@@ -169,6 +169,7 @@
     .photo-container {
         /* border: 1px solid blue; */
         width: 50px;
+        min-width: 50px;
         height: 50px;
         margin-right: 10px;
     }
@@ -186,7 +187,9 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        width: 40%;
+        width: 50%;
+        min-width: 50%;
+        max-width: 50%;
     }
 
     .content .music-name {
@@ -208,8 +211,11 @@
         align-items: flex-start;
         justify-content: center;
         text-align: start;
-        width: fit-content;
+        width: 50%;
+        min-width: 30%;
+        max-width: 50%;
         height: 50px;
+        padding-left: 10px;
     }
 
     .album .album-name {
