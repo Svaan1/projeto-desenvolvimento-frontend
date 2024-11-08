@@ -4,19 +4,17 @@
 
     export let data;
 
+    let audio;
+    let audioVolume = 0.1;
+    let isPlaying = false;
+    let mute_audio = false;
+
     let total_time = "00:30";
     let current_time = "00:00";
     let debounceTimer;
     let musics = [];
     let tries = [];
     let lives = 1;
-
-    let isFocused = false;
-    let guessedCorrectly = false;
-
-    function handleFocus() {
-        isFocused = true;
-    };
 
     async function debounce(v) {
         clearTimeout(debounceTimer);
@@ -51,52 +49,53 @@
         }
     };
 
-    let audio;
-    let audioVolume = 0.1;
-    let isPlaying = false;
-    let mute_audio = false;
-    let playing = false;
-
     function play_or_stop(){
         isPlaying = !isPlaying;
-        if (!audio) {
-            audio = new Audio(data.music.track.audio_preview);
-            audio.volume = mute_audio ? 0 : audioVolume;
-            audio.ontimeupdate = () => {
-                current_time = audio.currentTime.toFixed(2);
-            };
-            audio.onloadedmetadata = () => {
-                total_time = audio.duration.toFixed(2);
-            };
-        }
+
         if (isPlaying) {
-            audio.pause();
-        } else {
             audio.play();
+        } else {
+            audio.pause();
         }
     };
 
-    onMount(() => {        
-        if (audio) {
-            audio.volume = mute_audio ? 0 : audioVolume;
+    let audioProgress = 0;
+    let audioDuration = 100;
+
+    onMount(() => {
+        if (!audio) {
+            audio = new Audio(data.music.track.audio_preview);
+            audio.volume = audioVolume;
             audio.ontimeupdate = () => {
-                current_time = audio.currentTime.toFixed(2);
+                audioProgress = audio.currentTime
+                audioDuration = audio.duration
+
+                current_time = formatTime(audio.currentTime);
+
+                if (audio.currentTime >= audio.duration - 0.1) {
+                    isPlaying = false;
+                    audio.pause();  
+                }
             };
             audio.onloadedmetadata = () => {
-                total_time = audio.duration.toFixed(2);
+                total_time = formatTime(audio.duration);
             };
         }
     });
 
+    function formatTime(seconds) {
+        let min = Math.floor(seconds / 60).toString().padStart(2, '0');
+        let sec = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${min}:${sec}`;
+    }
+
     function return_five(){
-        console.log("clicked");
         if (audio) {
             audio.currentTime = Math.max(0, audio.currentTime - 5);
         }
     };
 
     function move_five(){
-        console.log("clicked");
         if (audio) {
             audio.currentTime = Math.min(audio.duration, audio.currentTime + 5);
         }
@@ -236,7 +235,7 @@
     
         <div class="bottom-center">
             <div class="bottom-controls">
-                <button class="bottom-control-button bottom-back-button">
+                <button class="bottom-control-button bottom-back-button" on:click={return_five}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"  >
                         <g fill="white" fill-rule="evenodd" clip-rule="evenodd">
                             <path d="M10.175 8.605a1.25 1.25 0 0 1 1.185-.855H14a.75.75 0 0 1 0 1.5h-2.46l-.5 1.5H12a2.75 2.75 0 1 1 0 5.5h-2a.75.75 0 0 1 0-1.5h2a1.25 1.25 0 1 0 0-2.5h-1.306a1.25 1.25 0 0 1-1.186-1.645z" />
@@ -244,20 +243,20 @@
                         </g>
                     </svg>
                 </button>
-                {#if playing}
-                <button class="bottom-control-button bottom-play-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"  >
-                        <path fill="white" d="m10 16.5l6-4.5l-6-4.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
-                    </svg>
-                </button>
-                {:else}
-                <button class="bottom-control-button bottom-pause-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 16 16"  >
+                {#if isPlaying}
+                <button class="bottom-pause-button" on:click={play_or_stop}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 16 16" {...$$props}>
                         <path fill="white" d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0m0 14.5a6.5 6.5 0 1 1 0-13a6.5 6.5 0 0 1 0 13M5 5h2v6H5zm4 0h2v6H9z" />
                     </svg>
                 </button>
+                {:else}
+                <button class="bottom-play-button" on:click={play_or_stop}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" {...$$props}>
+                        <path fill="white" d="m10 16.5l6-4.5l-6-4.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8" />
+                    </svg>
+                </button>
                 {/if}
-                <button class="bottom-control-button bottom-forward-button">
+                <button class="bottom-control-button bottom-forward-button" on:click={move_five}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24"  >
                         <g fill="white" fill-rule="evenodd" clip-rule="evenodd">
                             <path d="M10.175 8.605a1.25 1.25 0 0 1 1.185-.855H14a.75.75 0 0 1 0 1.5h-2.46l-.5 1.5H12a2.75 2.75 0 1 1 0 5.5h-2a.75.75 0 0 1 0-1.5h2a1.25 1.25 0 1 0 0-2.5h-1.306a1.25 1.25 0 0 1-1.186-1.645z" />
@@ -267,9 +266,9 @@
                 </button>
             </div>
             <div class="bottom-progress-container">
-                <label class="bottom-time-label" for="progress-bar-start">00:00</label>
-                <progress id="bottom-progress-bar" class="progress-bar" value="0" max="100"></progress>
-                <label class="bottom-time-label" for="progress-bar-end">00:30</label>
+                <label class="bottom-time-label" for="progress-bar-start">{current_time}</label>
+                <progress id="bottom-progress-bar" class="progress-bar" value={audioProgress} max={audioDuration}></progress>
+                <label class="bottom-time-label" for="progress-bar-end">{total_time}</label>
             </div>
         </div>
     
@@ -291,6 +290,7 @@
                 </button>
             {/if}
             <input type="range" class="bottom-range-bar" min="0" max="1" step="0.01" bind:value={audioVolume} on:input={() => {
+                audio.volume = audioVolume
                 mute_audio = audioVolume == 0
             }} />
         </div>
