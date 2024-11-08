@@ -8,7 +8,7 @@
         {outer_color: "#606060", inner_color: "#808080", mode_text: "Listener", modifiable_text_font: "60px", bottom_text: "better with friends", description: "We are not responsible for any internal fights.", text_color: "#FFFF99", bottom_text_color: "rgba(255, 255, 153, 0.7)",  description_color: "#FFFF99", current_game_page: "/music", isMultiPlayer: true},
     ]
 
-    let user = "tua mae";
+    let user = "hello world";
 
 </script>
 
@@ -21,11 +21,11 @@
         </div>
         <div class="modes-container">
             {#each modes as mode}
-            <Modes outer_color={mode.outer_color} inner_color={mode.inner_color} mode_text={mode.mode_text} 
-            bottom_text={mode.bottom_text} description={mode.description} text_color={mode.text_color} 
-            modifiable_text_font={mode.modifiable_text_font} bottom_text_color={mode.bottom_text_color} 
-            description_color={mode.description_color} current_game_page={mode.current_game_page}
-            isMultiPlayer={mode.isMultiPlayer}/>
+            <Modes  outer_color={mode.outer_color} inner_color={mode.inner_color} mode_text={mode.mode_text} 
+                    bottom_text={mode.bottom_text} description={mode.description} text_color={mode.text_color} 
+                    modifiable_text_font={mode.modifiable_text_font} bottom_text_color={mode.bottom_text_color} 
+                    description_color={mode.description_color} current_game_page={mode.current_game_page}
+                    isMultiPlayer={mode.isMultiPlayer}/>
             {/each}
         </div>
     </div>
@@ -33,33 +33,20 @@
 
 <style>
 
-    * {
+    :global(body) {
+        background-color: rgb(15, 15, 15);
         font-family: "Rubik Mono One", monospace;
         font-weight: 400;
         font-style: normal;
+        overflow: hidden;
     }
 
-    main {
-        width: 100vw;
-        display: flex;
-        height: 100%;
-        align-items: center;
-        justify-content: center;
-        background-color: rgb(14, 14, 14);
-    }
-    
     .main-container {
-        width: 98%;
         display: flex;
-        min-height: 98vh;
-        overflow-x: hidden;
-        position: relative;
         align-items: center;
-        border-radius: 25px;
         flex-direction: column;
         justify-content: center;
-        background-color: #191414;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        height: 100vh;
     }
 
     .header-text {

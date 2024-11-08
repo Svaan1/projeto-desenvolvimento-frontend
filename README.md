@@ -12,7 +12,7 @@ You know the drill
 
 ```bash
 # Start by cloning the project in the desired directory
-git clone https://github.com/MatheusMotizuki/spotify-guess
+git clone https://github.com/Svaan1/projeto-desenvolvimento-frontend.git
 ```
 
 ## Developing

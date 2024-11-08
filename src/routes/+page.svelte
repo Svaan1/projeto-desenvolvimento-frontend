@@ -2,7 +2,6 @@
     import Footer from '$components/footer.svelte'
 
     const handleClick = () => {
-        console.log("clicked!");
         window.location.href = "/home"
     }
 </script>
@@ -26,27 +25,22 @@
     </div>
 </main>
 <Footer /> 
-<!-- Footer from +footer.svelte -->
 
 <style>
-/* Section: GLobal styling */
-    *{
+
+    :global(body) {
+        background-color: rgb(15, 15, 15);
         font-family: "Rubik Mono One", monospace;
         font-weight: 400;
-        font-style: normal; 
-    }
-
-/* Section: Tag Styling */
-
-    main {
-        min-height: 100vh;
+        font-style: normal;
+        overflow: hidden;
     }
 
     h1{
         color: #fff;
         font-size: 4em;
         text-align: center;
-        margin-bottom: 0.3em;
+        margin-bottom: 1px;
     }
 
     h2,
@@ -68,14 +62,12 @@
         position: relative;
     }
 
-/* Section: class styling */
-
     .container {
         display: flex;
-        min-height: 100vh;
         align-items: center;
         flex-direction: column;
         justify-content: center;
+        height: 100dvh;
     }
 
     .image-container {
@@ -84,7 +76,9 @@
     }
 
     .spotify {
-        width: 100px;
+        margin: 0;
+        padding: 0;
+        width: 120px;
         user-select: none;
     }
 
@@ -109,27 +103,19 @@
         margin-left: 0.3rem;
     }
 
-/* Section: Hovers */
-
     .login:hover{
         box-shadow: 7px 10px #0c702f;
     }
 
-/* Section: Click */
-
     .login:active{
         background-color: #c2c2c2;
     }
-
-/* Section: before */
 
     p span::before{
         color: #ee2b2a;
         content: "Μουσική?";
         animation: words 20s infinite;
     } 
-
-/* Section: After */
 
     p span::after{
         content: "";
@@ -141,8 +127,6 @@
         background-color: rgb(15, 15, 15);
         animation: cursor .8s infinite, typing 20s steps(14) infinite;
     }
-
-/* Section: Animations */
 
     @keyframes cursor{
         to{
