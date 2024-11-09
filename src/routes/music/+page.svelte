@@ -1,5 +1,6 @@
 <script>
     import Cards from '$components/music_cards.svelte';
+    import Confetti from '$components/confetti.svelte';
     import { onMount } from 'svelte';
 
     export let data;
@@ -17,12 +18,18 @@
     let tries = [];
     let lives = 10;
 
-    let checkDate = "red";
+    let showConfetti = true;
+
+    let winMessage = false;
+    let showWinMessage = false;
+
+    let loseMessage = false;
+    let showLoseMessage = false;
 
     let lost;
     $: if (lives <= 0) {
-        // TODO: change this
-        alert("you lost")
+        showLoseMessage = true;
+        loseMessage = true;
     }
 
     function checkName(name1, name2) {
@@ -75,6 +82,8 @@
             return;
         }
 
+        console.log(item);
+
         if (tries.includes(item)) {
             //TODO change this
             alert("Already selected")
@@ -83,27 +92,20 @@
 
         tries = [...tries, item];
 
-        console.log(item)
-
         if (item.album.artists[0].name == data.music.artists[0].name &&
             item.name == data.music.track.name) {
         
             guessedCorrectly = true;
-            alert("Vocë ganhou")
+            winMessage = true;
+            showWinMessage = true;
+            setTimeout(() => {
+                showConfetti = false;
+            }, 10000);
+
             //TODO: change this
             // TODO: save winning and tries state
         } else {
             lives -= 1
-        }
-    };
-
-    const calc_date_time = (item) => {
-        const itemReleaseDate = new Date(item.album.release_date);
-        const musicReleaseDate = new Date(data.music.album.release_date);
-        if (itemReleaseDate.getTime() === musicReleaseDate.getTime()) {
-            is_near_music_color_date = "green";
-            display_arrow_hit = "none";
-            display_correct_icon = "block";
         }
     };
 
@@ -166,19 +168,206 @@
 
 </script>
 
+{#if winMessage && showWinMessage}
+    <div class="displayr fade-in">
+        <div class="funny">
+            <h1>You did it!!11!</h1>
+        </div>
+        <div class="close-container">
+            <button class="close-btn" on:click={() => { showWinMessage = false; }}>close</button>
+        </div>
+    </div>
+
+    <style>
+    .displayr {
+        z-index: 1000;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #262626;
+        width: 600px;
+        height: 500px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+
+    .funny {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        color: white;
+    }
+
+    .funny h1 {
+        margin-left: 0;
+    }
+
+    .close-container{
+        padding-bottom: 10px;
+    }
+
+    .close-btn{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: #1DB954;
+        width: 100px;
+        height: 50px;
+    }
+
+    @keyframes fadeIn {
+        from {
+            scale: 0;
+            opacity: 0;
+        }
+        to {
+            scale: 1;
+            opacity: 1;
+        }
+    }
+    </style>
+{/if}
+
+{#if loseMessage && showLoseMessage}
+    <div class="displayr fade-in">
+        <svg xmlns="http://www.w3.org/2000/svg" width="384" height="384" viewBox="0 0 48 48" {...$$props}>
+            <path fill="#ffe500" d="M7.95 21a16.05 16.05 0 1 0 32.1 0a16.05 16.05 0 1 0-32.1 0" />
+            <path fill="#ebcb00" d="M19.82 5.5A16.05 16.05 0 1 0 39.5 16.82A16.05 16.05 0 0 0 19.82 5.5m7.73 28.67a14.64 14.64 0 1 1 10.33-18a14.63 14.63 0 0 1-10.33 18" />
+            <path fill="#fff48c" d="M25.31 7.35c.17.65-1.77 1.72-4.31 2.41s-4.79.74-5 .09s1.77-1.72 4.33-2.41s4.8-.73 4.98-.09" />
+            <path fill="#45413c" d="M11.16 43.5a12.84 1.5 0 1 0 25.68 0a12.84 1.5 0 1 0-25.68 0" opacity="1" />
+            <path fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M7.95 21a16.05 16.05 0 1 0 32.1 0a16.05 16.05 0 1 0-32.1 0" />
+            <path fill="#ffaa54" d="M36.28 21.84c.17.65-.55 1.4-1.62 1.69s-2.08 0-2.25-.64s.59-1.4 1.59-1.69s2.11 0 2.28.64M13.81 27.9c.17.65 1.18.93 2.25.64s1.8-1 1.62-1.68s-1.18-.93-2.25-.64s-1.79 1.04-1.62 1.68" />
+            <path fill="#ffb0ca" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M21 28.46a.8.8 0 0 0-.49.41a.77.77 0 0 0 0 .63a5.69 5.69 0 0 0 10.83-2.92A.73.73 0 0 0 31 26a.77.77 0 0 0-.63-.11Z" />
+            <path fill="#ff87af" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M30.9 29.4a9.2 9.2 0 0 0-4.6.15a9.1 9.1 0 0 0-4 2.18a5.77 5.77 0 0 0 8.6-2.33" />
+            <path fill="#00b8f0" d="M46.92 23c-2.43 4.21-6.69-1.79-10.1-1.56c3.7-4.7 12.52-2.68 10.1 1.56" />
+            <path fill="#4acfff" d="M36.82 21.42h.25c4.07-2.85 10.7-.91 8.74 2.76A3.15 3.15 0 0 0 46.92 23c2.42-4.24-6.4-6.26-10.1-1.58" />
+            <path fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M46.92 23c-2.43 4.21-6.69-1.79-10.1-1.56c3.7-4.7 12.52-2.68 10.1 1.56" />
+            <path fill="#00b8f0" d="M40.49 12c1.84 2.61-2.91 3.49-3.72 5.59C35 14.06 38.65 9.36 40.49 12" />
+            <path fill="#4acfff" d="m36.77 17.56l.07-.15c-.57-3.22 2.41-6.63 4.06-4.45a2.14 2.14 0 0 0-.41-1c-1.84-2.6-5.49 2.1-3.72 5.6" />
+            <path fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M40.49 12c1.84 2.61-2.91 3.49-3.72 5.59C35 14.06 38.65 9.36 40.49 12" />
+            <path fill="#00b8f0" d="M47.17 14.89c-.3 2.23-3.18.4-4.6 1.1c.77-2.65 4.9-3.33 4.6-1.1" />
+            <path fill="#4acfff" d="m42.57 16l.11-.05c1.24-1.93 4.42-2.26 4.23-.34a1.55 1.55 0 0 0 .26-.71c.3-2.24-3.83-1.56-4.6 1.1" />
+            <path fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M47.17 14.89c-.3 2.23-3.18.4-4.6 1.1c.77-2.65 4.9-3.33 4.6-1.1" />
+            <path fill="#00b8f0" d="M5.18 34.23c4.22 2.42 4.88-4.91 8-6.43c-5.6-2.18-12.18 4-8 6.43" />
+            <path fill="#4acfff" d="m13.13 27.8l-.22.13c-5-.42-9.71 4.59-6.17 6.78a3.2 3.2 0 0 1-1.56-.48C1 31.8 7.58 25.62 13.13 27.8" />
+            <path fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M5.18 34.23c4.22 2.42 4.88-4.91 8-6.43c-5.6-2.18-12.18 4-8 6.43" />
+            <path fill="#00b8f0" d="M5.21 21.49c-.28 3.18 4.27 1.55 6 3c-.21-3.95-5.72-6.18-6-3" />
+            <path fill="#4acfff" d="m11.23 24.44l-.14-.09c-1.12-3.07-5.41-4.52-5.74-1.8a2 2 0 0 1-.14-1.06c.28-3.18 5.79-.95 6.02 2.95" />
+            <path fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M5.21 21.49c-.28 3.18 4.27 1.55 6 3c-.21-3.95-5.72-6.18-6-3" />
+            <path fill="#00b8f0" d="M.9 27.36c1.38 1.78 3-1.24 4.53-1.36c-2-1.9-5.91-.41-4.53 1.36" />
+            <path fill="#4acfff" d="M5.43 26h-.12c-2-1.05-5 .27-3.83 1.82a1.45 1.45 0 0 1-.58-.48C-.48 25.59 3.43 24.1 5.43 26" />
+            <path fill="none" stroke="#45413c" stroke-linecap="round" stroke-linejoin="round" d="M.9 27.36c1.38 1.78 3-1.24 4.53-1.36c-2-1.9-5.91-.41-4.53 1.36m31.87-11.63l-2.15 1.91A.81.81 0 0 0 31 19l2.83.57m-20.06 1.28l2.82.57a.8.8 0 0 1 .41 1.39l-2.15 1.91" />
+        </svg>
+        <div class="funny">
+            <h1>You Lost</h1>
+        </div>
+        <div class="close-container">
+            <button class="close-btn" on:click={() => { showLoseMessage = false; }}>close</button>
+        </div>
+    </div>
+    
+    <style>
+    .displayr {
+        z-index: 1000;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #262626;
+        width: 600px;
+        height: 500px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        animation: fadeIn 1s forwards;
+    }
+    
+    .funny {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        color: white;
+    }
+    
+    .funny h1 {
+        margin-left: 0;
+    }
+
+    .close-container{
+        padding-bottom: 10px;
+    }
+
+    .close-btn{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        background-color: #1DB954;
+        width: 100px;
+        height: 50px;
+    }
+
+    @keyframes fadeIn {
+        from {
+            scale: 0;
+            opacity: 0;
+        }
+        to {
+            scale: 1;
+            opacity: 1;
+        }
+    }
+    </style>
+{/if}
+
+{#if guessedCorrectly && showConfetti}
+    <div style="
+    position: fixed;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    pointer-events: none;">
+    <Confetti amount=10 delay={[0, 250]} />
+    </div>
+{/if}
+
 <div class="container">
     <div class="top">
-        <button class="icon-button" on:click={returnHome}>
-            <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
-                <path fill="white" d="m59.836 58.25l-3.447-21.553l3.24-17.822h.496c.651 0 1.287-.295 1.635-.896a1.795 1.795 0 0 0-.655-2.448l-.785-.453l.011-.062l-.102.01L37.625 2h-11.25L2.896 26.783a1.797 1.797 0 0 0-.657 2.448a1.8 1.8 0 0 0 2.452.655l2.789-3.104l1.998 5.327L5.992 58.25H2V62h60v-3.75zm-5.32-21.73l-.029.158l3.451 21.572h-2.5l-3.416-6.833l1.541-12.854l-3.024 9.89l-2.601-5.202l3.213 15h-2.742l-3.263-12.236l4.377-27.141l8.201.001zM39.645 6.781V4.813l4.543 3.75h3.534l3.028 3.75l-4.039-1.84h-3.029l-6.057-3.691zm-28.247 25.11L8.893 25.21L26.375 5.75l21.321 12.671l-4.467 27.69l3.237 12.139H24.5l-1.331-5.99l3.412-.77l1.113-.25l-1.019-2.282l.145-.867l.479-2.899l.15-.904l-.902-.169l-2.792-.524l.745-4.095h-9.643l-.567 2.316l-2.262-.425l-.941-.177l-.156.944l-.48 2.899l-.149.904l.901.169l2.109.396l.427 3.235l-2.569.542l-1.112.251l.461 1.043l1.101 2.49l.312.705l.752-.17l1.648-.371l.527 3.996H7.884zm14.207 16.946l.77 1.739l-13.899 3.135l-1.101-2.49l12.232-2.76zm-14.23-3.626l.479-2.898l14.521 2.727l-.479 2.898z" />
-                <path fill="white" d="M55.438 24.5h-4.374L49.813 32h4.372zM24.5 32l-1.875-7.5h-7.5L17 32zm16.875 3.75l1.875-7.5l-3.75-3.75H32L30.125 32h7.5zm-1.367-9.416l2.204 2.203l-1.345 5.379l-2.204-2.203zm.43 26.291L39.33 44.97l1.108-5.47h-9.206l-2.044 6.563l2.044 6.562z" />
-            </svg>
-        </button>
-        <div class="search-container">
-            <svg class="magnify" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512">
-                <path fill="white" d="m479.6 399.716l-81.084-81.084l-62.368-25.767A175 175 0 0 0 368 192c0-97.047-78.953-176-176-176S16 94.953 16 192s78.953 176 176 176a175.03 175.03 0 0 0 101.619-32.377l25.7 62.2l81.081 81.088a56 56 0 1 0 79.2-79.195M48 192c0-79.4 64.6-144 144-144s144 64.6 144 144s-64.6 144-144 144S48 271.4 48 192m408.971 264.284a24.03 24.03 0 0 1-33.942 0l-76.572-76.572l-23.894-57.835l57.837 23.894l76.573 76.572a24.03 24.03 0 0 1-.002 33.941" />
-            </svg>
-            <input type="text" class="search-bar" placeholder="I think today's music is..." on:keyup={({ target: { value } }) => debounce(value)} />
+        <div class="top-left">
+            <div class="info">
+                <h3>Time until next music: </h3>
+            </div>
+        </div>
+        <div class="top-center">
+            <button class="icon-button" on:click={returnHome}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+                    <path fill="white" d="m59.836 58.25l-3.447-21.553l3.24-17.822h.496c.651 0 1.287-.295 1.635-.896a1.795 1.795 0 0 0-.655-2.448l-.785-.453l.011-.062l-.102.01L37.625 2h-11.25L2.896 26.783a1.797 1.797 0 0 0-.657 2.448a1.8 1.8 0 0 0 2.452.655l2.789-3.104l1.998 5.327L5.992 58.25H2V62h60v-3.75zm-5.32-21.73l-.029.158l3.451 21.572h-2.5l-3.416-6.833l1.541-12.854l-3.024 9.89l-2.601-5.202l3.213 15h-2.742l-3.263-12.236l4.377-27.141l8.201.001zM39.645 6.781V4.813l4.543 3.75h3.534l3.028 3.75l-4.039-1.84h-3.029l-6.057-3.691zm-28.247 25.11L8.893 25.21L26.375 5.75l21.321 12.671l-4.467 27.69l3.237 12.139H24.5l-1.331-5.99l3.412-.77l1.113-.25l-1.019-2.282l.145-.867l.479-2.899l.15-.904l-.902-.169l-2.792-.524l.745-4.095h-9.643l-.567 2.316l-2.262-.425l-.941-.177l-.156.944l-.48 2.899l-.149.904l.901.169l2.109.396l.427 3.235l-2.569.542l-1.112.251l.461 1.043l1.101 2.49l.312.705l.752-.17l1.648-.371l.527 3.996H7.884zm14.207 16.946l.77 1.739l-13.899 3.135l-1.101-2.49l12.232-2.76zm-14.23-3.626l.479-2.898l14.521 2.727l-.479 2.898z" />
+                    <path fill="white" d="M55.438 24.5h-4.374L49.813 32h4.372zM24.5 32l-1.875-7.5h-7.5L17 32zm16.875 3.75l1.875-7.5l-3.75-3.75H32L30.125 32h7.5zm-1.367-9.416l2.204 2.203l-1.345 5.379l-2.204-2.203zm.43 26.291L39.33 44.97l1.108-5.47h-9.206l-2.044 6.563l2.044 6.562z" />
+                </svg>
+            </button>
+            <div class="search-container">
+                <svg class="magnify" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512">
+                    <path fill="white" d="m479.6 399.716l-81.084-81.084l-62.368-25.767A175 175 0 0 0 368 192c0-97.047-78.953-176-176-176S16 94.953 16 192s78.953 176 176 176a175.03 175.03 0 0 0 101.619-32.377l25.7 62.2l81.081 81.088a56 56 0 1 0 79.2-79.195M48 192c0-79.4 64.6-144 144-144s144 64.6 144 144s-64.6 144-144 144S48 271.4 48 192m408.971 264.284a24.03 24.03 0 0 1-33.942 0l-76.572-76.572l-23.894-57.835l57.837 23.894l76.573 76.572a24.03 24.03 0 0 1-.002 33.941" />
+                </svg>
+                <input type="text" class="search-bar" placeholder="I think today's music is..." on:keyup={({ target: { value } }) => debounce(value)} />
+            </div>
         </div>
     </div>
     <div class="content">
@@ -236,7 +425,9 @@
             </div>
         </div>
         <div class="right">
+            <!-- svelte-ignore a11y-no-static-element-interactions -->
             {#each musics as music}
+                <!-- svelte-ignore a11y-click-events-have-key-events -->
                 <div class="musiques" on:click={() => {checkTrack(music)}} >
                     <Cards banner={music.album.images[0].url} musicName={music.name} artistName={music.album.artists[0].name} albumName={music.album.name} launch={music.album.release_date} data={data}/>
                 </div>
@@ -383,8 +574,32 @@
     .top {
         display: flex;
         padding: 1rem 0;
-        justify-content: center;
+        justify-content: space-between;
+        align-items: center;
         background-color: #000;
+    }
+
+    .top-left {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 40%; 
+    }
+
+    .top-center{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex: 1;
+    }
+
+    .info {
+        margin-left: 15px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+        color: white;
     }
 
     .search-container {
