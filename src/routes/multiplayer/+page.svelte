@@ -351,9 +351,6 @@
 <div class="container">
     <div class="top">
         <div class="top-left">
-            <div class="info">
-                <h3>Time until next music: </h3>
-            </div>
         </div>
         <div class="top-center">
             <button class="icon-button" on:click={returnHome}>
@@ -404,13 +401,13 @@
                     <thead>
                         <tr>
                             <th style="width: 5%; text-align: center;">#</th>
-                            <th style="width: 25%; text-align: center;">Music</th>
-                            <th style="text-align: center;">Date</th>
-                            <th style="text-align: center;">Artist</th>
+                            <th style="width: 50%; text-align: center;">Name</th>
+                            <th style="text-align: center;">Points</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {#if tries.length > 0}
+                        <!-- TODO: change logic -->
+                        <!-- {#if tries.length > 0}
                             {#each tries as tr, index}
                                 <tr>
                                     <td>{10 - tries.indexOf(tr)}</td>
@@ -419,7 +416,7 @@
                                     <td style="color: {checkName(tr.album.artists[0].name, data.music.artists[0].name)}">{tr.album.artists[0].name}</td>
                                 </tr>
                             {/each}
-                        {/if}
+                        {/if} -->
                     </tbody>
                 </table>
             </div>
