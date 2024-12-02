@@ -631,7 +631,7 @@
     /* SVG icon styling */
     .magnify {
         position: absolute;
-        top: 45%;
+        top: 50%;
         left: 15px;
         transform: translateY(-50%);
         width: 20px;

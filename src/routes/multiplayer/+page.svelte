@@ -11,6 +11,11 @@
     let mute_audio = false;
     let guessedCorrectly = false;
 
+    // TODO: modify this
+    let player_name_1 = "Player 1";
+    let player_name_2 = "Player 2";
+    let player_name_3 = "Player 3";
+
     let total_time = "00:30";
     let current_time = "00:00";
     let debounceTimer;
@@ -351,6 +356,20 @@
 <div class="container">
     <div class="top">
         <div class="top-left">
+            <div class="info">
+                <div class="player_holder">
+                    <img src="https://wallpapercave.com/wp/wp4055557.png" alt="1player" />
+                    <span>{player_name_1}</span>
+                </div>
+                <div class="player_holder">
+                    <img src="https://th.bing.com/th/id/R.0aeb69eff521b880c2974ffe7ebb373a?rik=Jx3C6nG2wdWgMA&pid=ImgRaw&r=0" alt="2player" />
+                    <span>{player_name_2}</span>
+                </div>
+                <div class="player_holder">
+                    <img src="https://th.bing.com/th/id/OIP.wSITH-pPkVo5tOaVH47HrgAAAA?rs=1&pid=ImgDetMain" alt="3player" />
+                    <span>{player_name_3}</span>
+                </div>
+            </div>
         </div>
         <div class="top-center">
             <button class="icon-button" on:click={returnHome}>
@@ -363,7 +382,7 @@
                 <svg class="magnify" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512">
                     <path fill="white" d="m479.6 399.716l-81.084-81.084l-62.368-25.767A175 175 0 0 0 368 192c0-97.047-78.953-176-176-176S16 94.953 16 192s78.953 176 176 176a175.03 175.03 0 0 0 101.619-32.377l25.7 62.2l81.081 81.088a56 56 0 1 0 79.2-79.195M48 192c0-79.4 64.6-144 144-144s144 64.6 144 144s-64.6 144-144 144S48 271.4 48 192m408.971 264.284a24.03 24.03 0 0 1-33.942 0l-76.572-76.572l-23.894-57.835l57.837 23.894l76.573 76.572a24.03 24.03 0 0 1-.002 33.941" />
                 </svg>
-                <input type="text" class="search-bar" placeholder="I think today's music is..." on:keyup={({ target: { value } }) => debounce(value)} />
+                <input type="text" class="search-bar" placeholder="I don`t listen to this, surely..." on:keyup={({ target: { value } }) => debounce(value)} />
             </div>
         </div>
     </div>
@@ -608,6 +627,21 @@
         color: white;
     }
 
+    .info img {
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        transition: transform 0.1s ease;
+    }
+
+    .player_holder{
+        user-select: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
     .search-container {
         width: 100%;
         max-width: 400px;
@@ -628,7 +662,7 @@
     /* SVG icon styling */
     .magnify {
         position: absolute;
-        top: 45%;
+        top: 50%;
         left: 15px;
         transform: translateY(-50%);
         width: 20px;
@@ -693,7 +727,7 @@
         margin-top: 1rem;
     }
 
-    th, td {
+    th {
         border: 1px solid #b3b3b3;
         padding: 0.5rem;
         text-align: left;
